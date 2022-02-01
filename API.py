@@ -3,6 +3,7 @@ from flask import request
 import json
 
 app = Flask(__name__)
+app.config["DEBUG"] = True
 
 
 @app.route('/', methods=['GET'])
@@ -14,7 +15,7 @@ def home_page():
     
     return json_dump
 
-@app.route('/city/', methods=['GET'])
+@app.route('/temperature/city/', methods=['GET'])    #  /temperature/city/?city=ankara
 def request_page():
 
     user_query = str(request.args.get('city'))
@@ -29,4 +30,4 @@ def request_page():
 
 
 if __name__ == '__main__':
-    app.run(port=7776)
+    app.run( port=7776)
