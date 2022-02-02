@@ -1,6 +1,8 @@
+from random import random
 from flask import Flask
 from flask import request
 import json
+from random import randrange
 
 
 app = Flask(__name__)
@@ -20,10 +22,10 @@ def home_page():
 def request_page():
 
     user_query = str(request.args.get('city'))
+    temp = randrange(-5, 30)
 
 
-
-    data_set = {'City': f'temp {user_query}'}
+    data_set = {'City': f'{user_query}' , 'Temperature': f'{temp}'}
     json_dump = json.dumps(data_set)
     
     return json_dump
