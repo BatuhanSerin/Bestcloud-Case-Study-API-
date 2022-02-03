@@ -3,14 +3,14 @@ from flask import Flask
 from flask import request
 import requests
 import json
-from random import randrange
+
 
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
 
-@app.route('/temperature', methods=['GET'])  #  http://127.0.0.1:7776/temperature
+@app.route('/', methods=['GET'])  #  http://127.0.0.1:7776
 def home_page():
 
     data_set = {'Name': 'Batuhan', 'Lastname': 'Serin'}
@@ -19,11 +19,11 @@ def home_page():
 
     return json_dump
 
-@app.route('/temperature/city/', methods=['GET'])    #  http://127.0.0.1:7776//temperature/city/?city=eskisehir
+@app.route('/temperature', methods=['GET'])    #  http://127.0.0.1:7776/temperature?city=ankara
 def request_page():
 
     city = str(request.args.get('city'))
-    temp = randrange(-5, 30)
+    
     response = requests.get('http://api.openweathermap.org/data/2.5/weather?q='+city+'&APPID=95edf34d0dd7709f36b7ac7f67cf2399')
 
     data = response.json()
@@ -42,4 +42,4 @@ def request_page():
 
 
 if __name__ == '__main__':
-    app.run(host="127.0.0.1" , port=7776)
+    app.run(host="0.0.0.0" , port=7776)
